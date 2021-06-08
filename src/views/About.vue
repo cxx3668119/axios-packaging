@@ -3,11 +3,13 @@
     <h1>This is an about page</h1>
     <button @click="getHandle">发送get请求</button>
     <button @click="postHandle">发送post请求</button>
+    <button @click="getBymineHandle">发送我的 get请求</button>
   </div>
 </template>
 
 
 <script>
+import { get } from "../utils/req";
 export default {
   name: "About",
   methods: {
@@ -23,7 +25,7 @@ export default {
     //headers  表示请求头
     getHandle() {
       this.axios
-        .get("https://api.cat-shop.penkuoer.com/api/v1/products", {
+        .get("/api/v1/products", {
           params: {
             page: 3,
             per: 2,
@@ -45,12 +47,17 @@ export default {
           "https://api.cat-shop.penkuoer.com/api/v1/auth/login",
           {
             userName: "xiaoming",
-            password: "112132",
+            password: "111111",
           },
           {}
         )
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
+    },
+    getBymineHandle() {
+      get("https://api.cat-shop.penkuoer.com/api/v1/products", {}).then((res) =>
+        console.log(res)
+      );
     },
   },
 };
